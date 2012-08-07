@@ -110,7 +110,6 @@ import org.sonatype.nexus.proxy.repository.Repository;
 import org.sonatype.nexus.proxy.repository.ShadowRepository;
 import org.sonatype.nexus.proxy.storage.local.fs.DefaultFSLocalRepositoryStorage;
 import org.sonatype.nexus.proxy.utils.RepositoryStringUtils;
-import org.sonatype.nexus.util.SystemPropertiesHelper;
 import org.sonatype.scheduling.TaskInterruptedException;
 import org.sonatype.scheduling.TaskUtil;
 
@@ -183,17 +182,6 @@ public class DefaultIndexerManager
     private File workingDirectory;
 
     private File tempDirectory;
-
-    public DefaultIndexerManager()
-    {
-        // Note: this is needed and used in ITs only!
-        // See org.sonatype.nexus.rt.boot.ITIndexerActivationEventInspector for details
-        if ( SystemPropertiesHelper.getBoolean( "mavenIndexerBlockingCommits", DefaultIndexingContext.BLOCKING_COMMIT ) )
-        {
-            DefaultIndexingContext.BLOCKING_COMMIT = true;
-        }
-        // This above is needed and used in ITs only!
-    }
 
     protected Logger getLogger()
     {
